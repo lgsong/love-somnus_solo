@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.somnus.solo.dao.MerAccountDao" >
+  <resultMap id="BaseResultMap" type="com.somnus.solo.message.sample.MerAccount" >
+    <id column="ACCT_ID" property="acctId" jdbcType="INTEGER" />
+    <result column="ACCT_CODE" property="acctCode" jdbcType="VARCHAR" />
+    <result column="MER_CODE" property="merCode" jdbcType="VARCHAR" />
+    <result column="ACCT_NAME" property="acctName" jdbcType="VARCHAR" />
+    <result column="CURRENCY" property="currency" jdbcType="VARCHAR" />
+    <result column="BANK_CODE" property="bankCode" jdbcType="VARCHAR" />
+    <result column="BANK_NAME" property="bankName" jdbcType="VARCHAR" />
+    <result column="BANK_KEY" property="bankKey" jdbcType="VARCHAR" />
+    <result column="BRANCH_CODE" property="branchCode" jdbcType="VARCHAR" />
+    <result column="BRANCH_NAME" property="branchName" jdbcType="VARCHAR" />
+    <result column="BANK_ACCT_NO" property="bankAcctNo" jdbcType="VARCHAR" />
+    <result column="BANK_ACCT_NAME" property="bankAcctName" jdbcType="VARCHAR" />
+    <result column="STATUS" property="status" jdbcType="VARCHAR" />
+    <result column="MODIFY_BY" property="modifyBy" jdbcType="VARCHAR" />
+    <result column="MODIFY_TIME" property="modifyTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  
+  <sql id="Base_Column_List" >
+    ACCT_ID, ACCT_CODE, MER_CODE, ACCT_NAME, CURRENCY, BANK_CODE, BANK_NAME, BANK_KEY, 
+    BRANCH_CODE, BRANCH_NAME, BANK_ACCT_NO, BANK_ACCT_NAME, STATUS, 
+    MODIFY_BY, MODIFY_TIME
+  </sql>
+  
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from tcim_mer_account
+    where ACCT_ID = #{acctId,jdbcType=INTEGER}
+  </select>
+  
+  <select id="selectByAcctcode" resultMap="BaseResultMap" parameterType="String" >
+    select 
+    <include refid="Base_Column_List" />
+    from tcim_mer_account
+    where 
+    ACCT_CODE = #{acctCode,jdbcType=VARCHAR}
+  </select>
+  
+  <select id="selectByCondition" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from tcim_mer_account
+    <where>
+        <trim prefix="(" suffix=")" prefixOverrides="and | AND">
+            <if test="acctCode != null">
+                and ACCT_CODE = #{acctCode,jdbcType=VARCHAR}
+            </if>
+            <if test="bankCode != null">
+                and BANK_CODE = #{bankCode,jdbcType=VARCHAR}
+            </if>
+        </trim>
+    </where>
+  </select>
+  
+  <insert id="insert" parameterType="com.somnus.solo.message.sample.MerAccount" >
+    insert into tcim_mer_account (ACCT_ID, ACCT_CODE, MER_CODE, 
+      ACCT_NAME, CURRENCY, BANK_CODE, 
+      BANK_NAME, BANK_KEY, BRANCH_CODE, 
+      BRANCH_NAME, BANK_ACCT_NO, BANK_ACCT_NAME, 
+      STATUS,  MODIFY_BY, MODIFY_TIME)
+    values (#{acctId,jdbcType=INTEGER}, #{acctCode,jdbcType=VARCHAR}, #{merCode,jdbcType=VARCHAR}, 
+      #{acctName,jdbcType=VARCHAR}, #{currency,jdbcType=VARCHAR}, #{bankCode,jdbcType=VARCHAR}, 
+      #{bankName,jdbcType=VARCHAR}, #{bankKey,jdbcType=VARCHAR}, #{branchCode,jdbcType=VARCHAR}, 
+      #{branchName,jdbcType=VARCHAR}, #{bankAcctNo,jdbcType=VARCHAR}, #{bankAcctName,jdbcType=VARCHAR}, 
+      #{status,jdbcType=VARCHAR},  #{modifyBy,jdbcType=VARCHAR}, #{modifyTime,jdbcType=TIMESTAMP})
+  </insert>
+  
+</mapper>

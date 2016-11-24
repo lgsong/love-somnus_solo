@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+		http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
+	
+	<!-- 启动注解驱动的Spring MVC功能，注册请求url和注解POJO类方法的映射-->
+	<mvc:annotation-driven validator="validator" conversion-service="conversion-service" />
+	
+	<bean id="validator" class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean">
+        <property name="providerClass"  value="org.hibernate.validator.HibernateValidator"/>
+        <property name="validationMessageSource" ref="validateMessageSource"/>
+    </bean>
+    
+    <bean id="conversion-service" class="org.springframework.format.support.FormattingConversionServiceFactoryBean" />
+    
+    <bean id="validateMessageSource" class="org.springframework.context.support.ReloadableResourceBundleMessageSource">  
+        <property name="basename" value="classpath:/msg/message"/>  
+        <property name="fileEncodings" value="utf-8"/>  
+        <property name="cacheSeconds" value="120"/>  
+	</bean>
+	
+	<!-- 启动包扫描功能，以便注册带有@Controller等注解的类成为spring的bean -->
+	<context:component-scan base-package="com.somnus.solo.controller" />
+	
+	<!-- 对模型视图名称的解析，在请求时模型视图名称添加前后缀 -->
+	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver" p:prefix="/WEB-INF/views/" p:suffix=".jsp" />
+	
+	<!-- 开发环境 -->
+    <beans profile="dev">
+		<context:property-placeholder
+			ignore-unresolvable="true" location="classpath:/env/configurations-dev.properties" />
+	</beans>
+
+	<!-- SIT环境 -->
+	<beans profile="sit">
+		<context:property-placeholder
+			ignore-unresolvable="true" location="classpath:/env/configurations-sit.properties" />
+	</beans>
+
+	<!-- PRD环境 -->
+	<beans profile="prd">
+		<context:property-placeholder
+			ignore-unresolvable="true" location="classpath:/env/configurations-prd.properties" />
+	</beans>
+</beans>
