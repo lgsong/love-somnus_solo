@@ -10,7 +10,7 @@ import com.somnus.solo.message.sample.MerAccountQueryRequest;
 import com.somnus.solo.message.sample.MeracctRequest;
 import com.somnus.solo.support.http.HttpClientUtils;
 
-public class MerAccountTestcase extends AbstractTestSupport {
+public class MerAccountTestcase/* extends AbstractTestSupport */{
 	
 	@Test
     public void selectByAcctcode() throws Exception {
@@ -24,12 +24,12 @@ public class MerAccountTestcase extends AbstractTestSupport {
     	request.setPageSize(10);
     	request.setSign("365318FE009A25FE2DA498962FA92D01");
     	
-    	System.out.println("个人开户请求>>>:"+ JSON.toJSONString(request));
+    	System.out.println("账户查询请求>>>:"+ JSON.toJSONString(request));
     	@SuppressWarnings("unchecked")
 		Map<String,String> map = BeanUtils.describe(request);
 		map.remove("class");
     	String message = HttpClientUtils.doPost("http://localhost:8080/solo/merAccount2/selectByAcctcode", map );
-        System.out.println("个人开户响应<<<:"+message);
+        System.out.println("账户查询响应<<<:"+message);
     }
 	
 	
