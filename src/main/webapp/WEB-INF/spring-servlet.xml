@@ -11,21 +11,11 @@
 		http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd
 		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
 	
-	<!-- 启动注解驱动的Spring MVC功能，注册请求url和注解POJO类方法的映射-->
-	<mvc:annotation-driven validator="validator" conversion-service="conversion-service" />
+	<!-- 强制CGLIB代理 -->
+	<aop:aspectj-autoproxy proxy-target-class="true"/>
 	
-	<bean id="validator" class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean">
-        <property name="providerClass"  value="org.hibernate.validator.HibernateValidator"/>
-        <property name="validationMessageSource" ref="validateMessageSource"/>
-    </bean>
-    
-    <bean id="conversion-service" class="org.springframework.format.support.FormattingConversionServiceFactoryBean" />
-    
-    <bean id="validateMessageSource" class="org.springframework.context.support.ReloadableResourceBundleMessageSource">  
-        <property name="basename" value="classpath:/msg/message"/>  
-        <property name="fileEncodings" value="utf-8"/>  
-        <property name="cacheSeconds" value="120"/>  
-	</bean>
+	<!-- 启动注解驱动的Spring MVC功能，注册请求url和注解POJO类方法的映射-->
+	<mvc:annotation-driven />
 	
 	<!-- 启动包扫描功能，以便注册带有@Controller等注解的类成为spring的bean -->
 	<context:component-scan base-package="com.somnus.solo.controller" />

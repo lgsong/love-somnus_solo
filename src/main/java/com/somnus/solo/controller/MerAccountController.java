@@ -7,6 +7,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -24,6 +25,7 @@ import com.somnus.solo.support.exceptions.BizException;
 
 @Controller
 @RequestMapping(value = "merAccount")
+@Validated
 public class MerAccountController  extends BaseController{
 	private transient Logger	log = LoggerFactory.getLogger(this.getClass());
 
@@ -36,8 +38,6 @@ public class MerAccountController  extends BaseController{
 		log.info(Constants.REQUEST_MSG, JSON.toJSONString(request));
 		MerAccountQueryResponse response = new MerAccountQueryResponse();
 		try {
-			//字段校验
-			fieldChecked(result);
 			response = merAccountService.selectByAcctcode(request);
 			// 返回成功报文
 			MessageUtil.createCommMsg(response);
@@ -60,8 +60,6 @@ public class MerAccountController  extends BaseController{
 		log.info(Constants.REQUEST_MSG, JSON.toJSONString(request));
 		Message message = new Message();
 		try {
-			//字段校验
-			fieldChecked(result);
 			merAccountService.createMeracct(request);
 			// 返回成功报文
 			message = MessageUtil.createCommMsg();
