@@ -21,7 +21,7 @@
         </encoder>
     </appender>
     
-    <logger name="com.somnus.sara" level="info" />
+    <logger name="com.somnus.solo" level="info" />
 
 	<!-- 上线初期建议lever=info，正常运行后建以lever=error,测试时lever=error-->
     <logger name="org.jdbcdslog.ConnectionLogger" level="info" />
