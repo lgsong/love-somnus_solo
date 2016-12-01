@@ -1,4 +1,4 @@
-package com.somnus.solo.support.scheduler;
+package com.somnus.solo.annotation.event;
 
 import org.springframework.context.event.EventListener;
 import org.springframework.scheduling.annotation.Async;
