@@ -2,7 +2,7 @@
 <configuration>
     <jmxConfigurator />
 
-    <property name="log.base" value="logs" />
+    <property name="log.base" value="${catalina.base}/logs" />
     <!--格式化输出：%d表示日期，%thread表示线程名，%-5level：级别从左显示5个字符宽度  %msg表示日志消息，%n表示换行符-->  
 	<property name="pattern" value="%d{yyyy-MM-dd HH:mm:ss.SSS} [%X{sessionId}] %-5level [%thread] %logger{80} :%msg%n" />
 	
@@ -10,7 +10,7 @@
         <file>${log.base}/solo-root.log</file>
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
             <fileNamePattern>
-            	${log.base}/%d{yyyy-MM-dd}/spring-solo-%i.%d{yyyy-MM-dd}.log.gz
+            	${log.base}/%d{yyyy-MM-dd}/solo-root-%i.%d{yyyy-MM-dd}.log.gz
             </fileNamePattern>
             <TimeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
                 <MaxFileSize>30MB</MaxFileSize>
