@@ -13,7 +13,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = "classpath:spring-basic.xml")
-@ActiveProfiles("dev")
+@ActiveProfiles("prd")
 public abstract class AbstractTestSupport {
     protected transient Logger log = LoggerFactory.getLogger(this.getClass());
 
