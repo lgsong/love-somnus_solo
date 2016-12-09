@@ -20,6 +20,7 @@
 		<logback.version>1.1.7</logback.version>
 		<!-- commons tools -->
 		<commons.lang3.version>3.1</commons.lang3.version>
+		<commons.configuration.version>1.10</commons.configuration.version>
 		<commons.compress>1.5</commons.compress>
 		<commons.io.version>2.3</commons.io.version>
 		<commons.collections.version>3.2.1</commons.collections.version>
@@ -134,6 +135,11 @@
 			<groupId>org.apache.commons</groupId>
 			<artifactId>commons-lang3</artifactId>
 			<version>${commons.lang3.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>commons-configuration</groupId>
+			<artifactId>commons-configuration</artifactId>
+			<version>${commons.configuration.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>commons-io</groupId>

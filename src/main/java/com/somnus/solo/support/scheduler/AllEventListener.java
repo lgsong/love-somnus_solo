@@ -21,12 +21,4 @@ public class AllEventListener {
         System.out.println("需要发送邮件的邮件正文是:"+event.getText());
 	}
 	
-	@EventListener
-	public void handleNotify(NotifyEvent event) {
-		
-        System.out.println("通知到的接收人为:"+event.getReceiver());
-        
-        System.out.println("通知的内容是:"+event.getContent());
-	}
-	
 }

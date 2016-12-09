@@ -1,8 +1,8 @@
-package com.somnus.solo.support.scheduler;
+package com.somnus.solo.support.event.demo;
 
-import org.springframework.context.ApplicationEvent;
+import com.somnus.solo.support.event.RetryableBaseEvent;
 
-public class NotifyEvent  extends ApplicationEvent{
+public class NotifyEvent extends RetryableBaseEvent{
 	
 	private static final long serialVersionUID = 1L;
 
@@ -11,7 +11,7 @@ public class NotifyEvent  extends ApplicationEvent{
 	private String content;
 
 	public NotifyEvent(Object source, String receiver, String content) {
-		super(source);
+		super(source,"通知第三方");
 		this.receiver = receiver;
 		this.content = content;
 	}

@@ -2,10 +2,10 @@ package com.somnus.solo;
 
 import org.junit.Test;
 
+import com.somnus.solo.support.event.demo.NotifyEvent;
 import com.somnus.solo.support.holder.ApplicationContextHolder;
 import com.somnus.solo.support.scheduler.AsyncExecutor;
 import com.somnus.solo.support.scheduler.EmailEvent;
-import com.somnus.solo.support.scheduler.NotifyEvent;
 
 public class SpringTest extends AbstractTestSupport {
 	
@@ -25,7 +25,7 @@ public class SpringTest extends AbstractTestSupport {
 	}
 	
 	@Test
-	public void handleNotify(){
+	public void reEvent(){
 		ApplicationContextHolder.getApplicationContext().publishEvent(
 				new NotifyEvent(this, "Somnus", "I love you"));
 		
