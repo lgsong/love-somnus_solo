@@ -13,12 +13,24 @@
             <pattern>${pattern}</pattern>
         </layout>
     </appender>
-
+    
+    <property name="pattern2" value="%d{yyyy-MM-dd HH:mm:ss.SSS} [%X{rid}] [%X{rname}] %-5level [%thread] %logger{80} :%msg%n" />
+    
+    <appender name="EVENT_CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+        <layout name="StandardFormat" class="ch.qos.logback.classic.PatternLayout">
+            <pattern>${pattern2}</pattern>
+        </layout>
+    </appender>
+    
 	<!-- additivity的作用在于 children-logger是否使用 rootLogger配置的appender进行输出。-->
 	<!-- false：表示只用当前logger的appender-ref。								-->
 	<!-- true：表示当前logger的appender-ref和rootLogger的appender-ref都有效。 		-->
     <logger name="com.somnus.solo" level="trace" additivity="false">
         <appender-ref ref="ROOT_CONSOLE"/>
+    </logger>
+    
+    <logger name="com.somnus.solo.support.concurrent" level="trace" additivity="false">
+        <appender-ref ref="EVENT_CONSOLE"/>
     </logger>
 
 	<!-- 如果日志等级比root级别低，如果采用 <logger name="org.jdbcdslog.ConnectionLogger" level="info" /> -->

@@ -1,6 +1,6 @@
-package com.somnus.solo.support.event;
+package com.somnus.solo.support.concurrent.event;
 
-import com.somnus.solo.support.concurrent.Retryable;
+import com.somnus.solo.support.concurrent.task.Retryable;
 
 public abstract class RetryableBaseEvent extends BaseEvent implements Retryable {
 	
@@ -19,7 +19,7 @@ public abstract class RetryableBaseEvent extends BaseEvent implements Retryable 
 	public RetryableBaseEvent(Object source, String name) {
 		super(source, name);
 		this.total = 5;
-		this.interval = 60000;
+		this.interval = 30000;
 	}
 	
 	/**

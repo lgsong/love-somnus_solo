@@ -1,14 +1,16 @@
 package com.somnus.solo.support.concurrent.adapter;
 
+import com.somnus.solo.support.concurrent.task.Task;
+
 /**
  * Runnable接口适配器
  */
 public class RunnableAdapter extends AbstractAdapter implements Runnable {
 
-	private Runnable task;
+	private Task task;
 	
-	public RunnableAdapter(Runnable task){
-		super();
+	public RunnableAdapter(Task task){
+		super(task);
 		this.task = task;
 	}
 	

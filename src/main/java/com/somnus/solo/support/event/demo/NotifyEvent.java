@@ -1,6 +1,6 @@
 package com.somnus.solo.support.event.demo;
 
-import com.somnus.solo.support.event.RetryableBaseEvent;
+import com.somnus.solo.support.concurrent.event.RetryableBaseEvent;
 
 public class NotifyEvent extends RetryableBaseEvent{
 	

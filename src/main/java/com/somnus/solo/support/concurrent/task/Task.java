@@ -1,4 +1,4 @@
-package com.somnus.solo.support.concurrent;
+package com.somnus.solo.support.concurrent.task;
 
 /**
  * @description: 抽象任务

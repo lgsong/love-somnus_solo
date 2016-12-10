@@ -8,6 +8,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.somnus.solo.support.concurrent.adapter.RunnableAdapter;
+import com.somnus.solo.support.concurrent.task.Task;
 
 public class TaskExecutor {
 

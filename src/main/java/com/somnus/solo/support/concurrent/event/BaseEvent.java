@@ -1,4 +1,4 @@
-package com.somnus.solo.support.event;
+package com.somnus.solo.support.concurrent.event;
 
 import org.springframework.context.ApplicationEvent;
 

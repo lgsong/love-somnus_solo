@@ -14,29 +14,17 @@ public class RequestInfo implements Serializable {
 	 */
 	private String id;
 	/**
-	 * 请求名称
+	 * 事件名称
 	 */
 	private String name;
-	/**
-	 * 请求IP
-	 */
-	private String ip;
-	/**
-	 * 版本号
-	 */
-	private String version;
-	/**
-	 * 调用步骤
-	 */
-	private int step = 1;
 
 	public RequestInfo(String id){
 		this.id = id;
 	}
 	
-	public RequestInfo(String id, String ip){
+	public RequestInfo(String id, String name){
 		this(id);
-		this.ip = ip;
+		this.name = name;
 	}
 	
 	public String getId() {
@@ -55,35 +43,9 @@ public class RequestInfo implements Serializable {
 		this.name = name;
 	}
 
-	public String getIp() {
-		return ip;
-	}
-
-	protected void setIp(String ip) {
-		this.ip = ip;
-	}
-
-	public String getVersion() {
-		return version;
-	}
-
-	protected void setVersion(String version) {
-		this.version = version;
-	}
-
-	public int getStep() {
-		return step;
-	}
-
-	public void setStep(int step) {
-		this.step = step;
-	}
 
 	public RequestInfo clone(){
-		RequestInfo requestInfo = new RequestInfo(this.id, this.ip);
-		requestInfo.setName(this.name);
-		requestInfo.setVersion(this.version);
-		requestInfo.setStep(this.getStep());
+		RequestInfo requestInfo = new RequestInfo(this.id, this.name);
 		return requestInfo;
 	}
 

@@ -2,7 +2,7 @@ package com.somnus.solo.support.event.demo;
 
 import org.springframework.stereotype.Component;
 
-import com.somnus.solo.support.event.AsyncEventListener;
+import com.somnus.solo.support.concurrent.event.AsyncEventListener;
 
 @Component
 public class NotifyEventListener extends AsyncEventListener<NotifyEvent>{

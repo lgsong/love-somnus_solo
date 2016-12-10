@@ -1,13 +1,13 @@
-package com.somnus.solo.support.event;
+package com.somnus.solo.support.concurrent.event;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.ApplicationListener;
 
-import com.somnus.solo.support.concurrent.Retryable;
-import com.somnus.solo.support.concurrent.RetryableTask;
-import com.somnus.solo.support.concurrent.Task;
 import com.somnus.solo.support.concurrent.TaskExecutor;
+import com.somnus.solo.support.concurrent.task.Retryable;
+import com.somnus.solo.support.concurrent.task.RetryableTask;
+import com.somnus.solo.support.concurrent.task.Task;
 
 /**
  * @description: 支持异步处理的时间监听器

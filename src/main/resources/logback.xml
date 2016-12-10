@@ -21,7 +21,28 @@
         </encoder>
     </appender>
     
+    <property name="pattern2" value="%d{yyyy-MM-dd HH:mm:ss.SSS} [%X{rid}] [%X{rname}] %-5level [%thread] %logger{80} :%msg%n" />
+	
+	<appender name="EVENT_FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${log.base}/solo-event.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>
+            	${log.base}/%d{yyyy-MM-dd}/solo-event-%i.%d{yyyy-MM-dd}.log.gz
+            </fileNamePattern>
+            <TimeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                <MaxFileSize>30MB</MaxFileSize>
+            </TimeBasedFileNamingAndTriggeringPolicy>
+        </rollingPolicy>
+        <encoder>
+            <pattern>${pattern2}</pattern>
+        </encoder>
+    </appender>
+    
     <logger name="com.somnus.solo" level="info" />
+    
+    <logger name="com.somnus.solo.support.concurrent" level="info" additivity="false">
+        <appender-ref ref="EVENT_FILE"/>
+    </logger>
 
 	<!-- 上线初期建议lever=info，正常运行后建以lever=error,测试时lever=error-->
     <logger name="org.jdbcdslog.ConnectionLogger" level="info" />

@@ -1,4 +1,4 @@
-package com.somnus.solo.support.concurrent;
+package com.somnus.solo.support.concurrent.task;
 
 /**
  * @description: 可重试任务
