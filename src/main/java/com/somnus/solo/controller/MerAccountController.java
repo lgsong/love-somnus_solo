@@ -38,6 +38,8 @@ public class MerAccountController  extends BaseController{
 		log.info(Constants.REQUEST_MSG, JSON.toJSONString(request));
 		MerAccountQueryResponse response = new MerAccountQueryResponse();
 		try {
+			//MD5签名校验
+			signChecked(request);
 			response = merAccountService.selectByAcctcode(request);
 			// 返回成功报文
 			MessageUtil.createCommMsg(response);
@@ -60,6 +62,8 @@ public class MerAccountController  extends BaseController{
 		log.info(Constants.REQUEST_MSG, JSON.toJSONString(request));
 		Message message = new Message();
 		try {
+			//MD5签名校验
+			signChecked(request);
 			merAccountService.createMeracct(request);
 			// 返回成功报文
 			message = MessageUtil.createCommMsg();

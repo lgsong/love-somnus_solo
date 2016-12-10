@@ -12,10 +12,10 @@ public class MerAccountQueryRequest extends Message {
     private String acctCode;
     
     /**当前页码*/
-	private int pageNum;
+	private int pageNum = 1;
     
 	/**每页大小*/
-	private int pageSize;
+	private int pageSize = 25;
     
 	public String getAcctCode() {
 		return acctCode;
