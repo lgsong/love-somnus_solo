@@ -13,8 +13,10 @@
 	
 	<!-- 任务调度器 --> 
     <task:scheduler id="scheduler" pool-size="10" />
+    
+    <bean id="asyncExceptionHandler" class="com.somnus.solo.async.handler.AsyncExceptionHandler"/>
 	
     <!--开启注解调度支持 @Async @Scheduled-->  
-    <task:annotation-driven executor="executor" scheduler="scheduler" proxy-target-class="true" />
+    <task:annotation-driven executor="executor" scheduler="scheduler" proxy-target-class="true" exception-handler="asyncExceptionHandler"/>
 	
 </beans>
