@@ -54,7 +54,7 @@
 		<war.plugin.version>2.3</war.plugin.version>
 		<surefire.plugin.version>2.18.1</surefire.plugin.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<jdk.version>1.7</jdk.version>
+		<jdk.version>1.8</jdk.version>
 	</properties>
 
 	<dependencies>

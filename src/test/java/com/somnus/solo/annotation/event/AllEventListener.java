@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 public class AllEventListener {
 
 	@Async
-	@EventListener
+	@EventListener(condition = "#event.address == '10000@qq.com'")
 	public void handleEmail(EmailEvent event) {
 		try {
 			System.out.println("让程序暂停1分钟，相当于执行一个很耗时的任务");
