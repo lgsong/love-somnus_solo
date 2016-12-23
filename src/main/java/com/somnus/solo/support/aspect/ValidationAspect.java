@@ -5,6 +5,7 @@ import java.util.Set;
 import javax.validation.ConstraintViolation;
 import javax.validation.ValidationException;
 
+import org.apache.commons.lang3.ArrayUtils;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
@@ -35,6 +36,7 @@ public class ValidationAspect {
         MethodSignature signature = (MethodSignature) pjp.getSignature();
         try{
             MethodValidator methodValidator = validator.unwrap(MethodValidator.class);
+            log.info("args:{}",ArrayUtils.toString(pjp.getArgs()));
             Set<MethodConstraintViolation<Object>> parametersViolations = methodValidator.
             		validateAllParameters(pjp.getTarget(), signature.getMethod(), pjp.getArgs());
             if (!parametersViolations.isEmpty()) {

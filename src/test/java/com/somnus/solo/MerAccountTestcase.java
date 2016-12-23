@@ -1,34 +1,31 @@
 package com.somnus.solo;
 
-import java.util.Map;
-
-import org.apache.commons.beanutils.BeanUtils;
+import org.apache.http.client.fluent.Request;
+import org.apache.http.entity.ContentType;
 import org.junit.Test;
 
 import com.alibaba.fastjson.JSON;
 import com.somnus.solo.message.sample.MerAccountQueryRequest;
 import com.somnus.solo.message.sample.MeracctRequest;
-import com.somnus.solo.support.http.HttpClientUtils;
 
 public class MerAccountTestcase/* extends AbstractTestSupport */{
 	
 	@Test
     public void selectByAcctcode() throws Exception {
 		MerAccountQueryRequest request = new MerAccountQueryRequest();
-    	request.setSysCode("11111111111");
-    	request.setFrontName("test");
-    	request.setFrontTime("test");
-    	
+    	request.setSysCode("1111");
+    	request.setFrontName("abc");
+    	request.setFrontTime("2016-11-11 11:11:11");
     	request.setAcctCode("1020550016");
-    	request.setPageNum(1);
-    	request.setPageSize(10);
-    	request.setSign("365318FE009A25FE2DA498962FA92D01");
+    	
+    	request.setSign("203D7438EA5FA1EA10D072F7F50F44B9");
     	
     	System.out.println("账户查询请求>>>:"+ JSON.toJSONString(request));
-    	@SuppressWarnings("unchecked")
-		Map<String,String> map = BeanUtils.describe(request);
-		map.remove("class");
-    	String message = HttpClientUtils.doPost("http://localhost:8080/solo/merAccount2/selectByAcctcode", map );
+    	
+    	String message = Request.Post("http://localhost:8080/solo/merAccount/selectByAcctcode")
+    							.bodyString(JSON.toJSONString(request),ContentType.APPLICATION_JSON)
+    							.execute().returnContent().asString();
+    	
         System.out.println("账户查询响应<<<:"+message);
     }
 	
@@ -55,11 +52,12 @@ public class MerAccountTestcase/* extends AbstractTestSupport */{
     	request.setSign("26E258A9BD07294B3A5149316E1D2F18");
     	
     	System.out.println("个人开户请求>>>:"+ JSON.toJSONString(request));
-    	@SuppressWarnings("unchecked")
-		Map<String,String> map = BeanUtils.describe(request);
-		map.remove("class");
-    	String message = HttpClientUtils.doPost("http://localhost:8080/solo/merAccount2/createMeracct", map );
-        System.out.println("个人开户响应<<<:"+message);
+        
+    	String message = Request.Post("http://localhost:8080/solo/merAccount/createMeracct")
+				.bodyString(JSON.toJSONString(request),ContentType.APPLICATION_JSON)
+				.execute().returnContent().asString();
+    	
+    	System.out.println("个人开户响应<<<:"+message);
     }
 	
 }

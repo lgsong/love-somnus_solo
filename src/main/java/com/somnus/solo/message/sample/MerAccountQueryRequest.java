@@ -1,5 +1,7 @@
 package com.somnus.solo.message.sample;
 
+import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.apache.commons.lang3.builder.ToStringStyle;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import com.somnus.solo.message.Message;
@@ -35,5 +37,9 @@ public class MerAccountQueryRequest extends Message {
 	public void setPageSize(int pageSize) {
 		this.pageSize = pageSize;
 	}
+	
+	public String toString() {  
+    	return ToStringBuilder.reflectionToString(this, ToStringStyle.SHORT_PREFIX_STYLE);   
+    }
 	
 }
