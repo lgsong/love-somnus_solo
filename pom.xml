@@ -1,14 +1,15 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
+	
 	<groupId>com.somnus</groupId>
 	<artifactId>solo</artifactId>
 	<packaging>war</packaging>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>1.6.8</version>
 
 	<properties>
 		<!-- spring -->
-		<spring.version>4.2.8.RELEASE</spring.version>
+		<spring.version>4.3.5.RELEASE</spring.version>
 		<mybatis.paginator.version>1.2.17</mybatis.paginator.version>
 		<!-- mybatis -->
 		<mybatis.version>3.1.1</mybatis.version>
@@ -22,7 +23,9 @@
 		<commons.lang3.version>3.1</commons.lang3.version>
 		<commons.beanutils.version>1.8.3</commons.beanutils.version>
 		<commons.codec.version>1.6</commons.codec.version>
-		<httpcomponents.version>4.5.2</httpcomponents.version>
+		<!-- apache tools -->
+		<apache.httpcomponents.version>4.5.2</apache.httpcomponents.version>
+		<!-- time -->
 		<jodatime.version>2.3</jodatime.version>
 		<!-- aop -->
 		<aspectj.version>1.6.9</aspectj.version>
@@ -39,7 +42,7 @@
 		<!-- test -->
 		<junit.version>4.11</junit.version>
 		<!-- bean validator -->
-		<hibernate.validator.version>4.3.1.Final</hibernate.validator.version>
+		<hibernate.validator.version>4.3.2.Final</hibernate.validator.version>
 		<!-- alibaba -->
 		<alibaba.fastjson.version>1.2.16</alibaba.fastjson.version>
 		<alibaba.druid.version>1.0.25</alibaba.druid.version>
@@ -57,11 +60,6 @@
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-test</artifactId>
-			<version>${spring.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-context</artifactId>
 			<version>${spring.version}</version>
 		</dependency>
 		<dependency>
@@ -93,11 +91,6 @@
 		</dependency>
 
 		<!-- logback and slf4j -->
-		<dependency>
-			<groupId>org.slf4j</groupId>
-			<artifactId>slf4j-api</artifactId>
-			<version>${slf4j.version}</version>
-		</dependency>
 		<dependency>
 			<groupId>org.slf4j</groupId>
 			<artifactId>jcl-over-slf4j</artifactId>
@@ -135,17 +128,20 @@
 			<artifactId>commons-codec</artifactId>
 			<version>${commons.codec.version}</version>
 		</dependency>
-		<!-- httpclient -->
+		
+		<!-- apache tools -->
 		<dependency>
 			<groupId>org.apache.httpcomponents</groupId>
 			<artifactId>fluent-hc</artifactId>
-			<version>${httpcomponents.version}</version>
+			<version>${apache.httpcomponents.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.apache.httpcomponents</groupId>
 			<artifactId>httpmime</artifactId>
-			<version>${httpcomponents.version}</version>
+			<version>${apache.httpcomponents.version}</version>
 		</dependency>
+		
+		<!-- time -->
 		<dependency>
 			<groupId>joda-time</groupId>
 			<artifactId>joda-time</artifactId>
@@ -241,7 +237,6 @@
 			<artifactId>jackson-databind</artifactId>
 			<version>${jackson.version}</version>
 		</dependency>
-
 	</dependencies>
 
 	<!-- 构建管理 -->
@@ -261,6 +256,7 @@
 					<showWarnings>true</showWarnings>
 				</configuration>
 			</plugin>
+			
 			<!-- 将源码打成jar包 -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
@@ -315,6 +311,8 @@
 					<webXml>${basedir}/src/main/webapp/WEB-INF/web.xml</webXml>
 				</configuration>
 			</plugin>
+			
+			<!-- 运行tomcat -->
 			<plugin>
 				<groupId>org.apache.tomcat.maven</groupId>
 				<artifactId>tomcat7-maven-plugin</artifactId>
