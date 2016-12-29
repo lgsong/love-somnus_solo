@@ -101,7 +101,7 @@ public class MessageUtil {
 	 * @param message
 	 */
 	public static void createMsg(Message message) {
-		message.setSysCode(BasConstants.DEFAULT_SYSCODE);
+		message.setSysCode("10001");
 		message.setFrontTime(DateFormatUtils.format(new Date(), "yyyy-MM-dd HH:mm:ss"));
 		String hostName = SystemUtil.getLocalHostName();
 		message.setFrontName(hostName);
