@@ -44,9 +44,8 @@ public abstract class BaseController {
 		}
 	}
 	
-	@SuppressWarnings("unchecked")
 	protected void signChecked(Message message) throws Exception{
-		Map<String,Object> map = BeanUtils.describe(message);
+		Map<String,String> map = BeanUtils.describe(message);
 		map.remove("class");
 		SortedMap<String, Object> parameters = new TreeMap<String, Object>();
 		parameters.putAll(map);
