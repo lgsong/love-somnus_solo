@@ -3,16 +3,15 @@ package com.somnus.solo.support.aspect;
 import java.util.Set;
 
 import javax.validation.ConstraintViolation;
+import javax.validation.ConstraintViolationException;
 import javax.validation.ValidationException;
+import javax.validation.executable.ExecutableValidator;
 
 import org.apache.commons.lang3.ArrayUtils;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.reflect.MethodSignature;
-import org.hibernate.validator.method.MethodConstraintViolation;
-import org.hibernate.validator.method.MethodConstraintViolationException;
-import org.hibernate.validator.method.MethodValidator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +19,6 @@ import org.springframework.stereotype.Component;
 
 import com.somnus.solo.message.Message;
 
-@SuppressWarnings("deprecation")
 @Aspect
 @Component
 public class ValidationAspect {
@@ -35,19 +33,19 @@ public class ValidationAspect {
         Object result;
         MethodSignature signature = (MethodSignature) pjp.getSignature();
         try{
-            MethodValidator methodValidator = validator.unwrap(MethodValidator.class);
+        	ExecutableValidator executableValidator = validator.forExecutables();
             log.info("args:{}",ArrayUtils.toString(pjp.getArgs()));
-            Set<MethodConstraintViolation<Object>> parametersViolations = methodValidator.
-            		validateAllParameters(pjp.getTarget(), signature.getMethod(), pjp.getArgs());
+            Set<ConstraintViolation<Object>> parametersViolations = executableValidator.
+            		validateParameters(pjp.getTarget(), signature.getMethod(), pjp.getArgs());
             if (!parametersViolations.isEmpty()) {
-                throw new MethodConstraintViolationException(parametersViolations);
+                throw new ConstraintViolationException(parametersViolations);
             }
             result = pjp.proceed(); //Execute the method
 
-            Set<MethodConstraintViolation<Object>> returnValueViolations = methodValidator.
+            Set<ConstraintViolation<Object>> returnValueViolations = executableValidator.
             		validateReturnValue(pjp.getTarget(), signature.getMethod(), result);
             if (!returnValueViolations.isEmpty()) {
-                throw new MethodConstraintViolationException(returnValueViolations);
+                throw new ConstraintViolationException(returnValueViolations);
             }
         }catch (Throwable throwable){
             log.error("接口数据验证不通过：",throwable);
@@ -62,8 +60,8 @@ public class ValidationAspect {
 
     private Message exceptionHandle(Throwable throwable,Message message){
         if(throwable instanceof ValidationException){
-            if(throwable instanceof MethodConstraintViolationException){
-                for (ConstraintViolation<?> constraintViolation : ((MethodConstraintViolationException)throwable).getConstraintViolations()) {
+            if(throwable instanceof ConstraintViolationException){
+                for (ConstraintViolation<?> constraintViolation : ((ConstraintViolationException)throwable).getConstraintViolations()) {
                     /*IncomeResourceImpl#bankIncome(arg0).feeWay*/
                 	String path = constraintViolation.getPropertyPath().toString();
                     int index = path.indexOf('.');
