@@ -4,6 +4,7 @@ import java.util.Set;
 
 import javax.validation.ConstraintViolation;
 import javax.validation.ConstraintViolationException;
+import javax.validation.Validation;
 import javax.validation.ValidationException;
 import javax.validation.executable.ExecutableValidator;
 
@@ -14,7 +15,6 @@ import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.reflect.MethodSignature;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.somnus.solo.message.Message;
@@ -23,17 +23,14 @@ import com.somnus.solo.message.Message;
 @Component
 public class ValidationAspect {
 
-    private final Logger log = LoggerFactory.getLogger(this.getClass());
-    /** Match any public methods in a class annotated with @AutoValidating*/
-    @Autowired
-    private javax.validation.Validator validator;
+    private transient Logger log = LoggerFactory.getLogger(this.getClass());
 
     @Around("execution(public * *(..)) && @within(org.springframework.validation.annotation.Validated)")
     public Object validateMethodInvocation(ProceedingJoinPoint pjp) throws Throwable {
         Object result;
         MethodSignature signature = (MethodSignature) pjp.getSignature();
         try{
-        	ExecutableValidator executableValidator = validator.forExecutables();
+        	ExecutableValidator executableValidator = Validation.buildDefaultValidatorFactory().getValidator().forExecutables();
             log.info("args:{}",ArrayUtils.toString(pjp.getArgs()));
             Set<ConstraintViolation<Object>> parametersViolations = executableValidator.
             		validateParameters(pjp.getTarget(), signature.getMethod(), pjp.getArgs());
@@ -64,7 +61,7 @@ public class ValidationAspect {
                 for (ConstraintViolation<?> constraintViolation : ((ConstraintViolationException)throwable).getConstraintViolations()) {
                     /*IncomeResourceImpl#bankIncome(arg0).feeWay*/
                 	String path = constraintViolation.getPropertyPath().toString();
-                    int index = path.indexOf('.');
+                    int index = path.lastIndexOf('.');
                     if(index>0){
                         index = index+1;
                     }else{

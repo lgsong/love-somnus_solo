@@ -8,7 +8,7 @@ import com.alibaba.fastjson.JSON;
 import com.somnus.solo.message.sample.MerAccountQueryRequest;
 import com.somnus.solo.message.sample.MeracctRequest;
 
-public class MerAccountTestcase/* extends AbstractTestSupport */{
+public class HttpClientTest {
 	
 	@Test
     public void selectByAcctcode() throws Exception {
