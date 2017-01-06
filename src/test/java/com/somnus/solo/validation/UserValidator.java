@@ -1,4 +1,4 @@
-package com.somnus.solo.validation.demo;
+package com.somnus.solo.validation;
 
 import java.util.Collections;
 import java.util.List;

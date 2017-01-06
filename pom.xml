@@ -47,6 +47,9 @@
 		<!-- alibaba -->
 		<alibaba.fastjson.version>1.2.16</alibaba.fastjson.version>
 		<alibaba.druid.version>1.0.25</alibaba.druid.version>
+		<!-- redis -->
+		<spring.data.redis>1.7.6.RELEASE</spring.data.redis>
+		<redis.version>2.7.3</redis.version>
 		<!-- Plugins -->
 		<compiler.plugin.version>3.5.1</compiler.plugin.version>
 		<source.plugin.version>2.3</source.plugin.version>
@@ -71,6 +74,11 @@
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-context-support</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-oxm</artifactId>
 			<version>${spring.version}</version>
 		</dependency>
 		<dependency>
@@ -243,6 +251,18 @@
 			<groupId>com.fasterxml.jackson.core</groupId>
 			<artifactId>jackson-databind</artifactId>
 			<version>${jackson.version}</version>
+		</dependency>
+		
+		<!-- redis -->
+		<dependency>
+			<groupId>org.springframework.data</groupId>
+			<artifactId>spring-data-redis</artifactId>
+			<version>${spring.data.redis}</version>
+		</dependency>
+		<dependency>
+			<groupId>redis.clients</groupId>
+			<artifactId>jedis</artifactId>
+			<version>${redis.version}</version>
 		</dependency>
 	</dependencies>
 

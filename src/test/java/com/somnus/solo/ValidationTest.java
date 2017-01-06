@@ -16,7 +16,7 @@ import org.hibernate.validator.messageinterpolation.ResourceBundleMessageInterpo
 import org.hibernate.validator.resourceloading.PlatformResourceBundleLocator;
 import org.junit.Test;
 
-import com.somnus.solo.validation.demo.UserValidator;
+import com.somnus.solo.validation.UserValidator;
 import com.somnus.solo.validation.model.User;
 
 public class ValidationTest {
