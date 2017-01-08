@@ -33,8 +33,11 @@
 	<bean id="jedisConnectionFactory" class="org.springframework.data.redis.connection.jedis.JedisConnectionFactory"  
         p:host-name="${redis.host}" p:port="${redis.port}" p:password="${redis.pass}" p:pool-config-ref="jedisPoolConfig"/> 
 	
-	<bean id="redisTemplate" class="org.springframework.data.redis.core.StringRedisTemplate">  
-		<property name="connectionFactory" ref="jedisConnectionFactory" />  
-	</bean>
+	<bean id="redisTemplate" class="org.springframework.data.redis.core.RedisTemplate"
+        p:connection-factory-ref="jedisConnectionFactory" />
+        
+    <bean id="stringRedisTemplate" class="org.springframework.data.redis.core.StringRedisTemplate">
+        <property name="connectionFactory" ref="jedisConnectionFactory" />
+    </bean>
     
 </beans> 

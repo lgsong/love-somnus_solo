@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:cache="http://www.springframework.org/schema/cache"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+	
+    <bean id="abstractJmsReceiveListener" class="com.somnus.solo.rocketmq.support.listener.AbstractJmsReceiveListener" 
+    	scope="prototype" abstract="true" />
+    
+    <bean id="sampleStringRocketMQAction" class="com.somnus.solo.rocketmq.action.SampleStringAction" parent="abstractJmsReceiveListener"/>
+    
+    <!-- MQ消息监听器 -->
+    <bean id="messageListenerContainer" class="com.somnus.solo.rocketmq.support.listener.MessageListenerContainer">
+        <property name="namesrvAddr" value="${jms.rocketmq.namesrvAddr}" />
+		<property name="messageBodyConverter" ref="messageBodyConverter2"/>
+		<property name="subscribers">
+			<map>
+				<entry key-ref="sampleStringRocketMQTopic" value-ref="sampleStringRocketMQAction"/>
+			</map>
+		</property>
+    </bean>
+    
+    <!--  topics to be subscribed. -->
+    <bean id = "sampleStringRocketMQTopic" class="com.somnus.rocketmq.support.jms.RocketMQTopic">
+        <!-- consumer group -->
+        <property name="group" value="ConsumerGroupName"/>
+        <!-- instance name -->
+        <property name="instance" value="consumer" />
+        <!--  topic -->
+        <property name="topic" value="${rocketmq.topic}"/>
+        <!--  tags -->
+        <property name="tags" value="*"/>
+    </bean>
+    
+</beans>

@@ -50,7 +50,15 @@
 		<!-- redis -->
 		<spring.data.redis>1.7.6.RELEASE</spring.data.redis>
 		<redis.version>2.7.3</redis.version>
-		<!-- Plugins -->
+		<!-- MQ -->
+		<geronimo.version>1.1.1</geronimo.version>
+		<!-- ACTIVE MQ -->
+		<activemq.version>5.7.0</activemq.version>
+		<!-- ROCKET MQ -->
+		<alibaba.rocketmq.version>3.2.6</alibaba.rocketmq.version>
+		<!-- memcached -->
+		<memcached.version>2.12.0</memcached.version>
+		<!-- ******************** Plugins ********************-->
 		<compiler.plugin.version>3.5.1</compiler.plugin.version>
 		<source.plugin.version>2.3</source.plugin.version>
 		<war.plugin.version>2.3</war.plugin.version>
@@ -60,6 +68,36 @@
 	</properties>
 
 	<dependencies>
+		<!-- test -->
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>${junit.version}</version>
+			<scope>test</scope>
+		</dependency>
+		
+		<!-- logback and slf4j -->
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>jcl-over-slf4j</artifactId>
+			<version>${slf4j.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>ch.qos.logback</groupId>
+			<artifactId>logback-core</artifactId>
+			<version>${logback.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>ch.qos.logback</groupId>
+			<artifactId>logback-classic</artifactId>
+			<version>${logback.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>ch.qos.logback</groupId>
+			<artifactId>logback-access</artifactId>
+			<version>${logback.version}</version>
+		</dependency>
+		
 		<!-- spring -->
 		<dependency>
 			<groupId>org.springframework</groupId>
@@ -86,6 +124,11 @@
 			<artifactId>spring-webmvc</artifactId>
 			<version>${spring.version}</version>
 		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-jms</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
 
 		<!-- mybatis -->
 		<dependency>
@@ -97,28 +140,6 @@
 			<groupId>org.mybatis</groupId>
 			<artifactId>mybatis-spring</artifactId>
 			<version>${mybatis.spring.version}</version>
-		</dependency>
-
-		<!-- logback and slf4j -->
-		<dependency>
-			<groupId>org.slf4j</groupId>
-			<artifactId>jcl-over-slf4j</artifactId>
-			<version>${slf4j.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>ch.qos.logback</groupId>
-			<artifactId>logback-core</artifactId>
-			<version>${logback.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>ch.qos.logback</groupId>
-			<artifactId>logback-classic</artifactId>
-			<version>${logback.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>ch.qos.logback</groupId>
-			<artifactId>logback-access</artifactId>
-			<version>${logback.version}</version>
 		</dependency>
 
 		<!-- commons -->
@@ -206,14 +227,6 @@
 			<version>${jstl.version}</version>
 		</dependency>
 
-		<!-- test -->
-		<dependency>
-			<groupId>junit</groupId>
-			<artifactId>junit</artifactId>
-			<version>${junit.version}</version>
-			<scope>test</scope>
-		</dependency>
-
 		<!--pagination -->
 		<dependency>
 			<groupId>com.github.miemiedev</groupId>
@@ -264,6 +277,46 @@
 			<artifactId>jedis</artifactId>
 			<version>${redis.version}</version>
 		</dependency>
+		
+		<!-- jms -->
+		<dependency>
+			<groupId>org.apache.geronimo.specs</groupId>
+			<artifactId>geronimo-jms_1.1_spec</artifactId>
+			<version>${geronimo.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.geronimo.specs</groupId>
+			<artifactId>geronimo-jta_1.1_spec</artifactId>
+			<version>${geronimo.version}</version>
+		</dependency>
+
+		<!-- activeMQ -->
+		<dependency>
+			<groupId>org.apache.activemq</groupId>
+			<artifactId>activemq-pool</artifactId>
+			<version>${activemq.version}</version>
+		</dependency>
+		
+		<dependency>
+    <groupId>org.apache.xbean</groupId>
+    <artifactId>xbean-spring</artifactId>
+    <version>4.5</version>
+</dependency>
+
+		<!-- rocketmq -->
+		<dependency>
+			<groupId>com.alibaba.rocketmq</groupId>
+			<artifactId>rocketmq-client</artifactId>
+			<version>${alibaba.rocketmq.version}</version>
+		</dependency>
+		
+		<!-- memcached -->
+		<dependency>
+			<groupId>net.spy</groupId>
+			<artifactId>spymemcached</artifactId>
+			<version>${memcached.version}</version>
+		</dependency>
+		
 	</dependencies>
 
 	<!-- 构建管理 -->

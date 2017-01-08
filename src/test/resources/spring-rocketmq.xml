@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+	
+	<context:component-scan base-package="com.somnus.solo.rocketmq" />
+	
+	<!-- application 上下文 -->
+    <bean class="com.somnus.solo.support.holder.ApplicationContextHolder"/>
+    
+    <context:property-placeholder
+			ignore-unresolvable="true" location="classpath:message/rocketmq.properties" />
+	
+	<bean id="messageBodyConverter" class="com.somnus.solo.rocketmq.support.converter.StringMessageBodyConverter"/>
+    
+    <!--  template to send messages. -->
+    <bean id ="rocketMQTemplate" class="com.somnus.solo.rocketmq.support.template.RocketMQTemplate">    
+        <property name="producerGroup" value="ProducerGroupName"/>
+        <property name="namesrvAddr" value="${jms.rocketmq.namesrvAddr}" />
+        <property name="instanceName" value="Producer" />
+        <property name="messageBodyConverter" ref="messageBodyConverter"/>
+    </bean>
+    
+</beans>

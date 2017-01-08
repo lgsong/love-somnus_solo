@@ -56,9 +56,9 @@ public class RedisDaoImpl implements RedisDao {
 	}
 
 	@Override
-	@SuppressWarnings("unchecked")
 	public <V> V get(final String key, Class<V> clazz){
 		if(Map.class.isAssignableFrom(clazz)){
+			@SuppressWarnings("unchecked")
 			V v = (V) redisTemplate.opsForHash().entries(key);
 			return v;
 		}else{
@@ -68,6 +68,7 @@ public class RedisDaoImpl implements RedisDao {
 					byte[] rawKey = redisTemplate.getStringSerializer().serialize(key);
 					if (connection.exists(rawKey)) {
 						byte[] value = connection.get(rawKey);
+						@SuppressWarnings("unchecked")
 						V v = (V) valueSerializer.deserialize(value);
                         return v;
 					}
