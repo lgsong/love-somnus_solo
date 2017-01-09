@@ -6,6 +6,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.somnus.solo.memcached.MemCachedUtil;
+import com.somnus.solo.memcached.cache.Account;
 import com.somnus.solo.memcached.cache.AccountCache;
 import com.somnus.solo.support.holder.ApplicationContextHolder;
 

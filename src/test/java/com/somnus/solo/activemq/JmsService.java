@@ -12,11 +12,8 @@ import java.io.Serializable;
  */
 public interface JmsService {
 	
-	public void sendStringQueueMessage(final String message);
+	public void sendStringMessage(final String message);
 	
-	public void sendStringTopicMessage(final String message);
 	
-	public void sendObjectQueueMessage(Serializable message);
-	
-	public void sendObjectTopicMessage(Serializable message);
+	public void sendObjectMessage(Serializable message);
 }

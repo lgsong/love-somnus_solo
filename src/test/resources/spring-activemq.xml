@@ -49,7 +49,8 @@
 	<bean id="jmsTemplate" class="org.springframework.jms.core.JmsTemplate">
 		<!-- 这个connectionFactory对应的是我们定义的Spring提供的那个ConnectionFactory对象 -->
 		<property name="connectionFactory" ref="connectionFactory" />
-		<!-- pub/sub模型（发布/订阅） -->
+		<!-- 如果是false或者默认，则是Queue，p2p模型 -->
+		<!-- 如果是true，                  则是Topic，pub/sub模型-->
 		<property name="pubSubDomain" value="false" />
 	</bean>
 
